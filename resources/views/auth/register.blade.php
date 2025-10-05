@@ -1,11 +1,7 @@
 <x-guest-layout>
     <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#6B4226] to-[#4E2C1A]">
-        <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-xl">
-
-            <!-- Logo -->
-            <div class="flex justify-center mb-6">
-                <img src="{{ asset('images/logo.png') }}" alt="Etherna Wear Logo" class="h-14">
-            </div>
+        <div class="bg-white p-8 rounded-xl shadow-2xl text- center"> 
+            <img src="{{ asset('etherna.png') }}" alt="Etherna Wear" class="h-14">
 
             <h2 class="text-2xl font-bold text-center text-[#4E2C1A]">Create an Account</h2>
             <p class="text-center text-gray-600 mt-2">Join Etherna Wear today!</p>
