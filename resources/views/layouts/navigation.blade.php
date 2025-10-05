@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-gradient-to-r from-pink-400 via-pink-500 to-purple-400 border-b border-pink-300">
+<nav x-data="{ open: false }" class="bg-brown-dark border-b border-brown-medium">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 text-white">
@@ -18,16 +18,17 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="url('/')" :active="request()->is('/')" class="text-white hover:text-purple-100">
+                    <x-nav-link :href="url('/')" :active="request()->is('/')" class="text-cream hover:text-gold">
                         {{ __('Home') }}
                     </x-nav-link>
-                    <x-nav-link :href="url('/shop')" :active="request()->is('shop')" class="text-white hover:text-purple-100">
+
+                    <x-nav-link :href="url('/shop')" :active="request()->is('shop')" class="text-cream hover:text-gold">
                         {{ __('Shop') }}
                     </x-nav-link>
-                    <x-nav-link :href="url('/about')" :active="request()->is('about')" class="text-white hover:text-purple-100">
+                    <x-nav-link :href="url('/about')" :active="request()->is('about')" class="text-cream hover:text-gold">
                         {{ __('About') }}
                     </x-nav-link>
-                    <x-nav-link :href="url('/contact')" :active="request()->is('contact')" class="text-white hover:text-purple-100">
+                    <x-nav-link :href="url('/contact')" :active="request()->is('contact')" class="text-cream hover:text-gold">
                         {{ __('Contact') }}
                     </x-nav-link>
                 </div>
@@ -67,19 +68,20 @@
                     </x-dropdown>
                 @endauth
 
-                @guest
-                    <a href="{{ route('login') }}" class="px-3 text-white hover:text-purple-100">
-                        {{ __('Login') }}
+                <nav class="bg-brown-dark border-b border-brown-medium text-cream">
+                    <a href="{{ route('login') }}" class="px-4 py-2 bg-brown-medium text-white rounded hover:bg-rust transition">
+                        Login
                     </a>
-                    <a href="{{ route('register') }}" class="bg-white text-pink-600 px-3 py-1 rounded hover:bg-purple-100 hover:text-pink-700 transition">
-                        {{ __('Register') }}
+
+                    <a href="{{ route('register') }}" class="px-4 py-2 bg-brown-dark text-cream rounded hover:bg-gold hover:text-brown-dark transition">
+                        Register
                     </a>
-                @endguest
+                </nav>
             </div>
 
             <!-- Hamburger (Mobile) -->
             <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-pink-300 focus:outline-none transition duration-150 ease-in-out">
+                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-brown-medium-300 focus:outline-none transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
                               stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -94,7 +96,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-gradient-to-r from-pink-400 via-pink-500 to-purple-400 text-white">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-brown-dark text-cream">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="url('/')" :active="request()->is('/')">
                 {{ __('Home') }}
@@ -144,6 +146,7 @@
                     </x-responsive-nav-link>
                 </div>
             @endguest
+            @include('layouts.footer')
         </div>
     </div>
 </nav>
