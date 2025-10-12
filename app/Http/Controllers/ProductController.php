@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class DashboardController extends Controller
 {
-    public function show($id)
+    public function index()
     {
-        // For now, just show product id
-        return "Product details for product ID: " . $id;
+        //  you can fetch featured products here
+        $products = collect([]);
+
+        return view('dashboard', compact('products'));
     }
 }

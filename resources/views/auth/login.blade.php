@@ -1,7 +1,6 @@
 <x-guest-layout>
-    <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#6B4226] to-[#4E2C1A]">
-        <div class="bg-white p-8 rounded-xl shadow-2xl text- center"> 
-            <img src="{{ asset('etherna.png') }}" alt="Etherna Wear" class="h-14">
+        <div class="bg-white p-8 rounded-xl shadow-2xl image- center"> 
+            <img src="{{ asset('images/midnight.png') }}" alt="Midnight Suede" class="h-23 w-20 mx-auto">
             <!-- Session Status -->
             <x-auth-session-status class="mb-y" :status="session('status')" />
 
@@ -48,5 +47,4 @@
                 </div>
             </form>
         </div>
-    </div>
 </x-guest-layout>

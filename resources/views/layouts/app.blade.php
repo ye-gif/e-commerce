@@ -4,44 +4,38 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Midnight Suede') }}</title>
     @vite('resources/css/app.css') {{-- Tailwind CSS --}}
     @vite('resources/js/app.js') {{-- JavaScript (needed if using Alpine.js or Vue/React) --}}
 </head>
-<body class="antialiased bg-gray-100">
+<body class="bg-body">
 
     {{-- Navigation Bar --}}
-    <nav x-data="{ open: false }" class="bg-gradient-to-r from-pink-400 via-pink-500 to-purple-400 border-b border-pink-300">
+    <nav x-data="{ open: false }" class="bg-navigation">
         <!-- Primary Navigation Menu -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 text-white">
                 <div class="flex">
-                    <!-- Logo -->
-                    <div class="shrink-0 flex items-center">
-                        <a href="{{ url('/') }}" class="flex items-center space-x-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-black drop-shadow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7l3-7z" />
-                            </svg>
-                            <span class="text-xl font-bold tracking-wide drop-shadow">
-                                <span class="text-black">Etherna Wear</span>
-                            </span>
+
+                    <div class="flex items-center">
+                        <a href="{{ url('/') }}" class="text-2xl font-extrabold text-white font-poppins hover:text-hover1 transition">
+                            Midnight Suede
                         </a>
                     </div>
 
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="url('/')" :active="request()->is('/')" class="text-black hover:text-purple-100">
+                        <x-nav-link :href="url('/')" :active="request()->is('/')" class="text-white hover:text-hover1">
                             {{ __('Home') }}
                         </x-nav-link>
-                        <x-nav-link :href="url('/shop')" :active="request()->is('shop')" class="text-black hover:text-purple-100">
+                        <x-nav-link :href="url('/shop')" :active="request()->is('shop')" class="text-white hover:text-hover1">
                             {{ __('Shop') }}
                         </x-nav-link>
-                        <x-nav-link :href="url('/about')" :active="request()->is('about')" class="text-black hover:text-purple-100">
-                            {{ __('About') }}
+                        <x-nav-link :href="url('/collection')" :active="request()->is('collection')" class="text-white hover:text-hover1">
+                            {{ __('Collection') }}
                         </x-nav-link>
-                        <x-nav-link :href="url('/contact')" :active="request()->is('contact')" class="text-black hover:text-purple-100">
-                            {{ __('Contact') }}
+                        <x-nav-link :href="url('/about')" :active="request()->is('about')" class="text-white hover:text-hover1">
+                            {{ __('About') }}
                         </x-nav-link>
                     </div>
                 </div>
@@ -81,10 +75,10 @@
                     @endauth
 
                     @guest
-                        <a href="{{ route('login') }}" class="px-3 text-white hover:text-pink-100">
+                        <a href="{{ route('login') }}" class="px-3 text-text hover:text-black">
                             {{ __('Login') }}
                         </a>
-                        <a href="{{ route('register') }}" class="bg-pink text-white-600 px-3 py-1 rounded hover:bg-white-100 hover:text-pink-700 transition">
+                        <a href="{{ route('register') }}" class="bg-button text-text px-3 py-1 rounded hover:bg-secondary_button hover:text-black transition">
                             {{ __('Register') }}
                         </a>
                     @endguest
@@ -107,7 +101,7 @@
         </div>
 
         <!-- Responsive Navigation Menu -->
-        <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-gradient-to-r from-pink-250 via-pink-300 to-purple-310 text-white">
+        <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-etherna text-white">
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="url('/')" :active="request()->is('/')">
                     {{ __('Home') }}
@@ -115,11 +109,11 @@
                 <x-responsive-nav-link :href="url('/shop')" :active="request()->is('shop')">
                     {{ __('Shop') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="url('/collection')" :active="request()->is('collection')">
+                    {{ __('Collection') }}
+                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="url('/about')" :active="request()->is('about')">
                     {{ __('About') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="url('/contact')" :active="request()->is('contact')">
-                    {{ __('Contact') }}
                 </x-responsive-nav-link>
             </div>
 
@@ -165,6 +159,15 @@
     <main class="p-6">
         {{ $slot ?? '' }}
     </main>
-    @include('layouts.footer')
+
+    <!-- Page Content -->
+    <main class="flex-1 p-8 bg-gray-50">
+        @yield('content')
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1b1410] text-gray-300">
+        @include('layouts.footer')
+    </footer>
 </body>
 </html>

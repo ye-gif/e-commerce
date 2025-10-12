@@ -3,3 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.bg-custom {
+  background-color: #6B4226; /* custom color */
+}
+.background-hover{
+    background-color: #4E2C1A;
+    
+}

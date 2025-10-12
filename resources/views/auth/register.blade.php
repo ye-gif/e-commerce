@@ -1,10 +1,10 @@
 <x-guest-layout>
     <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#6B4226] to-[#4E2C1A]">
         <div class="bg-white p-8 rounded-xl shadow-2xl text- center"> 
-            <img src="{{ asset('etherna.png') }}" alt="Etherna Wear" class="h-14">
+            <img src="{{ asset('images/midnight.png') }}" alt="Midnight Suede" class="h-23 w-30">
 
             <h2 class="text-2xl font-bold text-center text-[#4E2C1A]">Create an Account</h2>
-            <p class="text-center text-gray-600 mt-2">Join Etherna Wear today!</p>
+            <p class="text-center text-gray-600 mt-2">Join Midnight Suede today!</p>
 
             <form method="POST" action="{{ route('register') }}" class="mt-6 space-y-4">
                 @csrf
