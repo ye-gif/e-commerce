@@ -5,48 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ config('app.name', 'Midnight Suede') }}</title>
-    @vite('resources/css/app.css') {{-- Tailwind CSS --}}
-    @vite('resources/js/app.js') {{-- JavaScript (needed if using Alpine.js or Vue/React) --}}
+    @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 </head>
 <body class="bg-body">
 
-    {{-- Navigation Bar --}}
-    <nav x-data="{ open: false }" class="bg-navigation">
-        <!-- Primary Navigation Menu -->
+    <nav x-data="{ open: false }" class="bg-navigation shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 text-white">
-                <div class="flex">
+            <div class="flex justify-between h-16 text-white items-center">
 
-                    <div class="flex items-center">
-                        <a href="{{ url('/') }}" class="text-2xl font-extrabold text-white font-poppins hover:text-hover1 transition">
-                            Midnight Suede
-                        </a>
-                    </div>
+                <div class="flex items-center space-x-6">
+                    <a href="{{ url('/') }}" class="text-2xl font-extrabold text-white font-poppins hover:text-hover1 transition">
+                        Midnight Suede
+                    </a>
 
-                    <!-- Navigation Links -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <div class="hidden space-x-8 sm:flex items-center">
                         <x-nav-link :href="url('/')" :active="request()->is('/')" class="text-white hover:text-hover1">
                             {{ __('Home') }}
                         </x-nav-link>
                         <x-nav-link :href="url('/shop')" :active="request()->is('shop')" class="text-white hover:text-hover1">
                             {{ __('Shop') }}
                         </x-nav-link>
-                        <x-nav-link :href="url('/collection')" :active="request()->is('collection')" class="text-white hover:text-hover1">
-                            {{ __('Collection') }}
-                        </x-nav-link>
                         <x-nav-link :href="url('/about')" :active="request()->is('about')" class="text-white hover:text-hover1">
                             {{ __('About') }}
                         </x-nav-link>
+                        @auth
+                            <x-nav-link :href="route('dashboard')" :active="request()->is('dashboard')" class="text-white hover:text-hover1">
+                                {{ __('Dashboard') }}
+                            </x-nav-link>
+                        @endauth
                     </div>
+
+                    <form action="{{ route('shop.index') }}" method="GET" class="hidden sm:flex items-center ms-4">
+                        @if(request('category_id'))
+                            <input type="hidden" name="category_id" value="{{ request('category_id') }}">
+                        @endif
+                        <input 
+                            type="text" 
+                            name="search" 
+                            value="{{ request('search') }}" 
+                            placeholder="Search products..." 
+                            class="px-3 py-1.5 rounded-l-md bg-[#f9f6f2] text-[#1b1410] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#D4A373] w-48 sm:w-64"
+                        >
+                        <button type="submit" class="bg-[#D4A373] hover:bg-[#c18b5f] text-[#1b1410] px-3 py-1.5 rounded-r-md font-semibold transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                    </form>
                 </div>
 
-                <!-- Right side (Auth Links) -->
-                <div class="hidden sm:flex sm:items-center sm:ms-6">
+                {{-- Right Section: Cart + Auth --}}
+                <div class="hidden sm:flex sm:items-center sm:space-x-4">
+                    {{-- Cart --}}
+                    <x-nav-link :href="route('cart.index')" :active="request()->is('cart')" class="relative text-white hover:text-hover1 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor" class="w-6 h-6 hover:text-hover1 transition">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.293 2.293a1 1 0 00.707 1.707H19M9 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z" />
+                        </svg>
+                        @if(session('cart') && count(session('cart')) > 0)
+                            <span class="absolute -top-2 -right-3 bg-hover1 text-white text-xs px-1.5 py-0.5 rounded-full">
+                                {{ count(session('cart')) }}
+                            </span>
+                        @endif
+                    </x-nav-link>
+
+                    {{-- Profile Dropdown --}}
                     @auth
-                        <!-- Dropdown for Authenticated Users -->
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
-                                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black hover:text-purple-100 focus:outline-none transition">
+                                <button class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-white hover:text-hover1 focus:outline-none transition">
                                     <div>{{ Auth::user()->name }}</div>
                                     <div class="ms-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -63,6 +92,10 @@
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
 
+                                <x-dropdown-link :href="route('orders.index')">
+                                    {{ __('My Orders') }}
+                                </x-dropdown-link>
+
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <x-dropdown-link :href="route('logout')"
@@ -74,6 +107,7 @@
                         </x-dropdown>
                     @endauth
 
+                    {{-- Guest --}}
                     @guest
                         <a href="{{ route('login') }}" class="px-3 text-text hover:text-black">
                             {{ __('Login') }}
@@ -83,89 +117,17 @@
                         </a>
                     @endguest
                 </div>
-
-                <!-- Hamburger (Mobile) -->
-                <div class="-me-2 flex items-center sm:hidden">
-                    <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-pink-300 focus:outline-none transition duration-150 ease-in-out">
-                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
-                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M4 6h16M4 12h16M4 18h16" />
-                            <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden"
-                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Responsive Navigation Menu -->
-        <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-etherna text-white">
-            <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="url('/')" :active="request()->is('/')">
-                    {{ __('Home') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="url('/shop')" :active="request()->is('shop')">
-                    {{ __('Shop') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="url('/collection')" :active="request()->is('collection')">
-                    {{ __('Collection') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="url('/about')" :active="request()->is('about')">
-                    {{ __('About') }}
-                </x-responsive-nav-link>
-            </div>
-
-            <!-- Responsive Settings Options -->
-            <div class="pt-4 pb-1 border-t border-pink-200">
-                @auth
-                    <div class="px-4">
-                        <div class="font-medium text-base">{{ Auth::user()->name }}</div>
-                        <div class="font-medium text-sm">{{ Auth::user()->email }}</div>
-                    </div>
-
-                    <div class="mt-3 space-y-1">
-                        <x-responsive-nav-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-responsive-nav-link>
-
-                        <!-- Logout -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <x-responsive-nav-link :href="route('logout')"
-                                    onclick="event.preventDefault(); this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-responsive-nav-link>
-                        </form>
-                    </div>
-                @endauth
-
-                @guest
-                    <div class="mt-3 space-y-1 px-4">
-                        <x-responsive-nav-link :href="route('login')">
-                            {{ __('Login') }}
-                        </x-responsive-nav-link>
-                        <x-responsive-nav-link :href="route('register')">
-                            {{ __('Register') }}
-                        </x-responsive-nav-link>
-                    </div>
-                @endguest
             </div>
         </div>
     </nav>
 
-    {{-- Page Content --}}
+    {{-- Main Content --}}
     <main class="p-6">
         {{ $slot ?? '' }}
-    </main>
-
-    <!-- Page Content -->
-    <main class="flex-1 p-8 bg-gray-50">
         @yield('content')
     </main>
 
-    <!-- Footer -->
+    {{-- Footer --}}
     <footer class="bg-[#1b1410] text-gray-300">
         @include('layouts.footer')
     </footer>

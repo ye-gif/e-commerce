@@ -9,12 +9,12 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // roduct model and DB seeded:
+        // product model and DB seeded:
         if (class_exists(Product::class)) {
             $products = Product::latest()->take(8)->get();
         } else {
             
-            $products = collect([]);//products
+            $products = collect([]);
         }
 
         return view('dashboard', compact('products'));

@@ -6,19 +6,20 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class Seller
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle($request, Closure $next)
     {
-        if (auth()->check()&& auth()->user()->role === 'admin'){
+        if (auth()->user() && auth()->user()->is_seller) {
             return $next($request);
         }
 
-    return direct('/')-> with('error', 'Access Denied.Admoins only.');
+        abort(403, 'Unauthorized');
     }
+
 }

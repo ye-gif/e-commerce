@@ -12,7 +12,8 @@
                     Discover <span class="text-[#D4A373]">Luxury Bags</span>
                 </h1>
                 <p class="text-lg text-gray-200 mb-8">Elegant designs crafted for timeless style.</p>
-                <a href="{{ route('shop.index') }}" class="bg-[#D4A373] hover:bg-[#c18b5f] text-[#1b1410] px-8 py-3 rounded-lg font-semibold shadow-lg transition">
+                <a href="{{ route('shop.index') }}"
+                   class="bg-[#D4A373] hover:bg-[#c18b5f] text-[#1b1410] px-8 py-3 rounded-lg font-semibold shadow-lg transition">
                     Shop Now
                 </a>
             </div>
@@ -27,7 +28,8 @@
                     New Collection: <span class="text-[#D4A373]">Suede Elegance</span>
                 </h1>
                 <p class="text-lg text-gray-200 mb-8">Soft textures. Bold statements.</p>
-                <a href="{{ route('shop.index') }}" class="bg-[#D4A373] hover:bg-[#c18b5f] text-[#1b1410] px-8 py-3 rounded-lg font-semibold shadow-lg transition">
+                <a href="{{ route('shop.index') }}"
+                   class="bg-[#D4A373] hover:bg-[#c18b5f] text-[#1b1410] px-8 py-3 rounded-lg font-semibold shadow-lg transition">
                     Explore
                 </a>
             </div>
@@ -42,7 +44,8 @@
                     Handcrafted <span class="text-[#D4A373]">Leather Artistry</span>
                 </h1>
                 <p class="text-lg text-gray-200 mb-8">Experience luxury in every stitch.</p>
-                <a href="{{ route('shop.index') }}" class="bg-[#D4A373] hover:bg-[#c18b5f] text-[#1b1410] px-8 py-3 rounded-lg font-semibold shadow-lg transition">
+                <a href="{{ route('shop.index') }}"
+                   class="bg-[#D4A373] hover:bg-[#c18b5f] text-[#1b1410] px-8 py-3 rounded-lg font-semibold shadow-lg transition">
                     View More
                 </a>
             </div>
@@ -56,7 +59,7 @@
         </div>
     </section>
 
-    <!-- Featured Products -->
+    <!-- Featured Products Section -->
     <section class="py-16 bg-white">
         <div class="max-w-6xl mx-auto px-6">
             <h2 class="text-3xl font-bold text-gray-800 text-center mb-10">Featured Bags</h2>
@@ -67,8 +70,9 @@
                     <img src="{{ asset('images/bag1.jpg') }}" alt="Leather Handbag" class="w-full h-64 object-cover rounded-t-lg">
                     <div class="p-4 text-center">
                         <h3 class="text-lg font-semibold">Black Prada Galleria Large Saffiano Leather Bag | PRADA</h3>
-                        <p class="text-gray-600">8,499.00</p>
-                        <a href="/shop" class="mt-3 inline-block bg-[#6B4226] hover:bg-[#4E2C1A] text-white px-4 py-2 rounded">
+                        <p class="text-gray-600">₱8,499.00</p>
+                        <a href="/shop"
+                           class="mt-3 inline-block bg-[#6B4226] hover:bg-[#4E2C1A] text-white px-4 py-2 rounded">
                             View Product
                         </a>
                     </div>
@@ -80,7 +84,8 @@
                     <div class="p-4 text-center">
                         <h3 class="text-lg font-semibold">Marc Jacobs The Medium Tote Bag - Black</h3>
                         <p class="text-gray-600">₱4,899.00</p>
-                        <a href="/shop" class="mt-3 inline-block bg-[#6B4226] hover:bg-[#4E2C1A] text-white px-4 py-2 rounded">
+                        <a href="/shop"
+                           class="mt-3 inline-block bg-[#6B4226] hover:bg-[#4E2C1A] text-white px-4 py-2 rounded">
                             View Product
                         </a>
                     </div>
@@ -90,9 +95,10 @@
                 <div class="bg-white rounded-lg shadow hover:shadow-lg transition">
                     <img src="{{ asset('images/bag3.jpg') }}" alt="Crossbody Bag" class="w-full h-64 object-cover rounded-t-lg">
                     <div class="p-4 text-center">
-                        <h3 class="text-lg font-semibold">Miraggio crossbody bagsE</h3>
+                        <h3 class="text-lg font-semibold">Miraggio Crossbody Bags</h3>
                         <p class="text-gray-600">₱1,499.00</p>
-                        <a href="/shop" class="mt-3 inline-block bg-[#6B4226] hover:bg-[#4E2C1A] text-white px-4 py-2 rounded">
+                        <a href="/shop"
+                           class="mt-3 inline-block bg-[#6B4226] hover:bg-[#4E2C1A] text-white px-4 py-2 rounded">
                             View Product
                         </a>
                     </div>
@@ -100,7 +106,9 @@
             </div>
         </div>
     </section>
-        <script>
+
+    <!-- Hero Carousel Script -->
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
             const slides = document.querySelectorAll(".carousel-slide");
             const dots = document.querySelectorAll(".carousel-dot");
@@ -115,20 +123,16 @@
                 current = index;
             }
 
-            // Auto-slide every 5 seconds
             setInterval(() => {
                 const next = (current + 1) % slides.length;
                 showSlide(next);
             }, 5000);
 
-            // Allow clicking dots to navigate
             dots.forEach((dot, i) => {
                 dot.addEventListener("click", () => showSlide(i));
             });
 
-            // Initialize
             showSlide(0);
         });
     </script>
-
 @endsection

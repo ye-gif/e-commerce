@@ -17,11 +17,13 @@ export default {
                 hero:'#7E2625',//bow
                 category:'#292F17',//juniper
                 text: '#F1ECD8', //candle
+                text1:' #46000dff', 
                 product_cards:'#9A8670',//Product cards → Beaver (#9A8670) background + Coffee (#795434) buttons
                 hover:'#4f1818ff', //crimson depth
                 midnight: '#3a050fff',
                 button:'#795434', //coffee
                 navigation:'#2C261E',
+                button1:'#2a1c09ff',
                 hover1:'#4D1514',
                 section:'#9A8670 ',
                 hover1:'#816344ff',

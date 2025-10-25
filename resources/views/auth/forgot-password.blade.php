@@ -1,28 +1,26 @@
-<x-guest-layout>
-    <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#6B4226] to-[#4E2C1A]">
-        <div class="bg-white p-8 rounded-xl shadow-2xl text- center"> 
-            <img src="{{ asset('images/midnight.png') }}" alt="Midnight Suede" class="h-23 w-30">
+@extends('layouts.app')
 
-            <h2 class="text-2xl font-bold text-center text-[#4E2C1A]">Reset Password</h2>
-            <p class="text-center text-gray-600 mt-2">Enter your email to receive a reset link.</p>
+@section('content')
+<div class="max-w-md mx-auto mt-10 bg-white p-8 shadow-lg rounded-lg">
+    <h2 class="text-2xl font-bold mb-4">Forgot Password</h2>
+    @if (session('status'))
+        <div class="bg-green-100 text-green-700 p-3 rounded mb-4">{{ session('status') }}</div>
+    @endif
 
-            <form method="POST" action="{{ route('password.email') }}" class="mt-6 space-y-4">
-                @csrf
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input id="email" type="email" name="email" required
-                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-[#6B4226] focus:border-[#6B4226]">
-                </div>
-                <div>
-                    <button type="submit" class="w-full bg-[#6B4226] hover:bg-[#4E2C1A] text-white py-2 px-4 rounded-lg shadow-md transition">
-                        Send Reset Link
-                    </button>
-                </div>
-            </form>
+    <form action="{{ route('password.email') }}" method="POST">
+        @csrf
+        <label for="email" class="block mb-2 font-medium text-gray-700">Email address</label>
+        <input type="email" name="email" id="email" required
+               class="w-full border border-gray-300 p-2 rounded mb-4">
 
-            <p class="mt-6 text-center text-sm text-gray-600">
-                <a href="{{ route('login') }}" class="text-[#6B4226] font-medium hover:underline">Back to Login</a>
-            </p>
-        </div>
-    </div>
-</x-guest-layout>
+        @error('email')
+            <div class="text-red-600 mb-4">{{ $message }}</div>
+        @enderror
+
+        <button type="submit"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+            Send Reset Link
+        </button>
+    </form>
+</div>
+@endsection

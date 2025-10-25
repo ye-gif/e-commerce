@@ -34,10 +34,10 @@
                 @forelse($products ?? [] as $product)
                     <div class="group bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-1">
                         <div class="relative">
-                            <img src="{{ $product->image_url ?? asset('images/placeholder.png') }}" 
-                                 alt="{{ $product->name }}" 
-                                 class="w-full h-60 object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition"></div>
+                            <img src="{{ asset('storage/' . $product->image) }}" 
+                            alt="{{ $product->name }}" 
+                            class="w-full h-60 object-cover group-hover:scale-105 transition duration-500">
+
                         </div>
                         <div class="p-5 text-center">
                             <h3 class="font-semibold text-lg text-[#2C261E] truncate">{{ $product->name }}</h3>

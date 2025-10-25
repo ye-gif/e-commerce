@@ -1,0 +1,101 @@
+/* ============================================================
+   seller PRODUCT PAGE STYLES
+   ============================================================ */
+
+/* --- ADD PRODUCT BUTTON --- */
+.btn-add-product {
+  background-color: #a67c52;
+  color: #fff;
+  border: 2px solid #a67c52;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-add-product:hover {
+  background-color: #fff;
+  color: #a67c52;
+  border-color: #a67c52;
+}
+
+/* --- ALERT MESSAGE --- */
+.alert-success {
+  background-color: #d4edda;
+  border-left: 5px solid #155724;
+  color: #155724;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* --- TABLE STYLES --- */
+.seller-products-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.seller-products-table th,
+.seller-products-table td {
+  border: 1px solid #e2e8f0;
+  padding: 12px;
+  text-align: center;
+}
+
+.seller-products-table th {
+  background-color: #f4f4f4;
+  font-weight: 700;
+  color: #2d2d2d;
+}
+
+.seller-products-table tr:hover {
+  background-color: #fafafa;
+}
+
+/* --- PRODUCT IMAGE --- */
+.product-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* --- ACTION BUTTONS --- */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-edit {
+  background-color: #4e342e;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.btn-edit:hover {
+  background-color: #3e2723;
+}
+
+.btn-delete {
+  background-color: #7b1f1f;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn-delete:hover {
+  background-color: #641515;
+}
